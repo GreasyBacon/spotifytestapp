@@ -1,4 +1,30 @@
-var mergeCompleted = function() {
+var mergeCompleted = function(userId, playlistId) {
+	
+	var footerInfo = $("#footer-info");
+	var mergeButton = $("#merge-button");
+	
+	$('#loggedin').hide();
+	$('#userplaylists').hide();
+	$('#playlist-created').show();
+	$('#embedded-playlist').show();
+	
+	var playlistUri = "spotify:user:" + userId + ":playlist:" + playlistId;
+	var playlistShareUrl = 'https://open.spotify.com/user/' + userId + '/playlist/' + playlistId;
+	
+	var playlistEmbedHtml = '<iframe src=' + 
+		'"https://embed.spotify.com/?uri=' + playlistUri + '"' +
+		 'width="300px" height="380px" frameborder="0"' +
+		 'allowtransparency="true"></iframe>';
+	
+	$('#playlist-embed').append(playlistEmbedHtml);
+	
+	$('iframe[src*="embed.spotify.com"]').each( function() {
+		$(this).css('width',$(this).parent(1).css('width'));
+		$(this).attr('src',$(this).attr('src'));
+  	});
+	
+	mergeButton.prop('disabled', 'disabled');
+	footerInfo.animate( { height:"0px" }, { queue:false, duration:500 });
 	
 };
 
@@ -120,15 +146,15 @@ var applyEventListeners = function(userId, access_token) {
 					for(var i=0; i<filteredList.length; ++i) {
 						for(var j=i+1; j<filteredList.length; ++j) {
 							if(filteredList[i] === filteredList[j])
-								filteredList.splice(j--, 1);
+								filteredList.splice(j--, 1);								
 						}
 					}
 					
 					//add all tracks to new playlist - with playlistId
-					Promise.try(addTracksToPlaylist(userId, access_token, playlistId, filteredList))
-					.then(function(playlistId){
-						debugger
-						mergeCompleted(playlistId);
+					var addTracks = addTracksToPlaylist(userId, access_token, playlistId, filteredList);
+					
+					addTracks.then(function(playlistId){
+						mergeCompleted(userId, playlistId);
 					});				
 					
 				});

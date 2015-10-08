@@ -113,3 +113,15 @@ body {
   margin-top:15px;
   width: 50%
 }
+
+ul.share-buttons {
+  list-style: none;
+  padding: 0;
+  width:70%;
+  margin: auto;
+}
+
+ul.share-buttons li{
+  display: inline;
+  padding: 10px;
+}
