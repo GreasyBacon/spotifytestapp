@@ -5,6 +5,20 @@ $(document).ready(function(){
 	var initialJumboHeight = jumbotronHeader.height();
 	jumbotronHeader.height(window.innerHeight / 2);
 	
+	var msie = navigator.userAgent.indexOf('MSIE ');
+    var trident = navigator.userAgent.indexOf('Trident/');
+    var edge = navigator.userAgent.indexOf('Edge/');
+	
+	if (msie > 0 || trident > 0 || edge > 0) {
+        // IE 10/11/12 or older
+		$("#login-button").prop('disabled', true);
+		$("#login-button").parent().append("<div class='alert alert-danger' role='alert'>" +
+			"Looks like you're running Internet Explorer. Unfortunately, I can't guarantee that this app will work" +
+			" for you, or look as how it has been designed." +
+			" Please download the latest version of Google Chrome (which this has been tested with)" + 
+			" if you would like to use this app.</div>");
+    }
+	
 	/**
 		* Obtains parameters from the hash of the URL
 		* @return Object
