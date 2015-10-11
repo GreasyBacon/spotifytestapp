@@ -58,6 +58,7 @@ var applyEventListeners = function(userId, access_token) {
 	$( ".playlist-grid-cell img" ).off('mouseenter');
 	$( ".playlist-grid-cell" ).off('click');
 	$('#merge-button').off('click');
+	$('#new-merge').off('click');
 	
 	$( ".playlist-grid-cell img" ).mouseenter(
 							
@@ -187,6 +188,32 @@ var applyEventListeners = function(userId, access_token) {
 				});
 			
 			});
+			
+		}
+	);
+	
+	$('#new-merge').click(
+	
+		function() {
+
+			$("#playlist-name").prop('disabled', false);
+			
+			var userPlaylistsSource = document.getElementById('playlist').innerHTML,
+				userPlaylistsTemplate = Handlebars.compile(userPlaylistsSource),
+				userPlaylistsPlaceholder = document.getElementById('user-playlists');
+				
+			$("#user-playlists").empty();
+			$("#album-count").text('0');
+			$("#track-count").text('0');
+			$('#playlist-embed').find('iframe').remove();
+			$("#no-playlists-left").hide();
+		
+			getPlaylists(access_token, userId, userPlaylistsPlaceholder, userPlaylistsTemplate);
+			
+			$('#loggedin').show();
+			$('#userplaylists').show();
+			$('#playlist-created').hide();
+			$('#embedded-playlist').hide();
 			
 		}
 	);
