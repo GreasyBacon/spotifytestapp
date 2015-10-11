@@ -44,9 +44,19 @@ $(document).ready(function(){
 			
 			var userId = getUserDetails(access_token, userProfilePlaceholder, userProfileTemplate);
 			
-			userId.then(function(userId){
+			userId.then(function(response){
 				
-				if (userId) {
+				if (response['id']) {
+					
+					var userId = response['id'];
+				
+					userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+					
+					$('#login').hide();
+					$("#mainpageinfo").hide();
+					jumbotronHeader.height(initialJumboHeight);
+					$('#loggedin').show();
+					
 					getPlaylists(access_token, userId, userPlaylistsPlaceholder, userPlaylistsTemplate);
 				} else {
 					alert('Error signing in.');

@@ -14,24 +14,7 @@ var getUserDetails = function(accessToken, userProfilePlaceholder, userProfileTe
 			}
 		})
 	).then(function(response){
-		
-		if(response['id']) {
-
-			var jumbotronHeader = $("#jumboheader");
-			var initialJumboHeight = jumbotronHeader.height();
-			
-			userProfilePlaceholder.innerHTML = userProfileTemplate(response);
-			
-			$('#login').hide();
-			$("#mainpageinfo").hide();
-			jumbotronHeader.height(initialJumboHeight);
-			$('#loggedin').show();
-			
-			return response['id'];
-		} else {
-			return null;
-		}
-		
+		return response;		
 	});
 	
 };
