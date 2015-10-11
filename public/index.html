@@ -61,14 +61,14 @@
         </div>
       
       <script id="user-profile-template" type="text/x-handlebars-template">
-        <h1>Logged in as {{display_name}}</h1>
-        <div class="media">
+        <div class="media">        
           <table class="user-info">
             <tr>
-            <td><img class="media-object" width="150" src="{{images.0.url}}" /></td>
+            <td><img class="media-object" width="200" src="{{images.0.url}}" /></td>
             </tr>
           </table>
-          <table class="user-info table">
+          <h1>Hi, {{display_name}}!</h1>  
+          <!--<table class="pull-right">
             <tr>
               <td><b>Display Name</b></td>
               <td>{{display_name}}</td>
@@ -81,7 +81,7 @@
               <td><b>Id</b></td>
               <td>{{id}}</td>
             </tr>
-          </table>
+          </table> -->
           <!--<div class="pull-left">
             <img class="media-object" width="150" src="{{images.0.url}}" />
           </div>
@@ -107,7 +107,7 @@
       <div id="playlist-created" hidden>
         <h1>Yo' playlists have been merged!</h1>
         <br>
-        <p>Good for you!</p>  
+        <h3>Good for you!</h3>  
         <br>
         <buton id="new-merge" class="btn btn-success btn-lg">Merge More Playlists?</button>
       </div>
@@ -216,6 +216,11 @@
             </div>
             <button type="submit" id="merge-button" class="btn btn-success">Merge Yo' Playlists</button>
           </form>
+          <div id='progress-div' hidden>
+            <span>Progress:</span>
+            <span id='progress-status'></span>
+            <img src='../img/ajax-loader.gif'>
+          </div>
        </div>
     </div>
 
