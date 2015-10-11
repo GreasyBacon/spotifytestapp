@@ -178,7 +178,7 @@ var applyEventListeners = function(userId, access_token) {
 					
 					for(var i=0; i<filteredList.length; ++i) {
 						for(var j=i+1; j<filteredList.length; ++j) {
-							if(filteredList[i] === filteredList[j])
+							if(filteredList[i] === filteredList[j] || filteredList[j].indexOf('local') !== -1)
 								filteredList.splice(j--, 1);								
 						}
 					}
