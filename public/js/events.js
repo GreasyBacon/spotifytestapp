@@ -23,7 +23,7 @@ var mergeCompleted = function(userId, playlistId) {
 		$(this).attr('src',$(this).attr('src'));
   	});
 	  
-	var playlistShareText = 'I just created a new merged playlist using mergeyoplaylists.today! #mergeyoplaylists #spotify #music';
+	var playlistShareText = 'I just created a new merged playlist using mergeyoplaylists.today!';
 	var playlistShareUrl = 'https://open.spotify.com/user/' + userId + '/playlist/' + playlistId;
 	
 	//set share button links
