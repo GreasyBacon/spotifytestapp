@@ -1,3 +1,112 @@
+var getUserDetails = function(accessToken, userProfilePlaceholder, userProfileTemplate) {
+	
+	return Promise.resolve(
+		$.ajax({
+			url: 'https://api.spotify.com/v1/me',
+			headers: {
+				'Authorization': 'Bearer ' + accessToken
+			},
+			success: function(response) {
+				
+			},
+			error: function() {
+				
+			}
+		})
+	).then(function(response){
+		
+		if(response['id']) {
+
+			var jumbotronHeader = $("#jumboheader");
+			var initialJumboHeight = jumbotronHeader.height();
+			
+			userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+			
+			$('#login').hide();
+			$("#mainpageinfo").hide();
+			jumbotronHeader.height(initialJumboHeight);
+			$('#loggedin').show();
+			
+			return response['id'];
+		} else {
+			return null;
+		}
+		
+	});
+	
+};
+
+
+var getPlaylists = function(accessToken, userId, userPlaylistsPlaceholder, userPlaylistsTemplate) {
+
+	$.ajax({
+		url: 'https://api.spotify.com/v1/users/' + userId + '/playlists?limit=50',
+		headers: {
+			'Authorization': 'Bearer ' + accessToken
+		},
+		success: function(response) {
+
+			for (var i=0; i<response['items'].length; i++) {
+				var template = userPlaylistsTemplate(response['items'][i]);
+				userPlaylistsPlaceholder.innerHTML += template;
+			}
+			
+			$("#userplaylists").show();
+			
+			$(".span-tooltip").tooltip({
+				placement: "top"
+			});
+			
+			var alreadyloading = false;
+			var offset = 50;
+			
+			$(window).scroll(function() {
+				if ($('body').height() <= ($(window).height() + $(window).scrollTop())) {
+					if (alreadyloading == false) {
+						alreadyloading = true;
+						
+						$("#playlists-loading-gif").show();
+						
+						$.ajax({
+							url: 'https://api.spotify.com/v1/users/' + userId + '/playlists?limit=50&offset=' + offset,
+							headers: {
+								'Authorization': 'Bearer ' + accessToken
+							},
+							success: function(response){
+
+								for (var i=0; i<response['items'].length; i++) {
+									var template = userPlaylistsTemplate(response['items'][i]);
+									userPlaylistsPlaceholder.innerHTML += template;
+								}
+								
+								$("#playlists-loading-gif").hide();
+								
+								if (response['next']) {
+									offset += 50;
+									alreadyloading = false;
+								} else {
+									$("#no-playlists-left").show();
+								}
+								
+								applyEventListeners(userId, accessToken);
+								
+							}
+						});
+						
+						
+					}
+				}
+			});
+			
+		applyEventListeners(userId, accessToken);
+			
+		},
+		error: function() {
+			
+		}
+	});	
+};
+
 var createPlaylist = function(userId, accessToken, playlistName) {
 	
 	return Promise.resolve(
