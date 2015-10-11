@@ -1,5 +1,7 @@
 var mergeCompleted = function(userId, playlistId) {
 	
+	$("#progress-status").text('All done!');
+	
 	var footerInfo = $("#footer-info");
 	var mergeButton = $("#merge-button");
 	
@@ -90,6 +92,7 @@ var applyEventListeners = function(userId, access_token) {
 			var albumCount = $("#album-count");
 			var trackCount = $("#track-count");
 			var footerInfo = $("#footer-info");
+			var progressDiv = $("#progress-div");
 			var dataTrackCount = parseInt($( this ).find('img').data('trackcount'));
 		
 			if ( $( this ).find('.selected').length ) {
@@ -128,6 +131,7 @@ var applyEventListeners = function(userId, access_token) {
 					//animate in footer with info - TRIGGERED
 					footerInfo.animate( { height:"0px" }, { queue:false, duration:0 });					
 					footerInfo.prop('hidden', false);
+					progressDiv.hide();
 					footerInfo.animate( { height:"70px" }, { queue:false, duration:500 });
 				}
 				
@@ -148,7 +152,8 @@ var applyEventListeners = function(userId, access_token) {
 			
 			$( this ).prop('disabled', true);
 			$("#playlist-name").prop('disabled', true);
-			
+			$("#progress-div").show();
+						
 			//create new playlist with name provided
 			var playlistId = createPlaylist(userId, access_token, playlistName);
 			
@@ -207,6 +212,7 @@ var applyEventListeners = function(userId, access_token) {
 			$("#track-count").text('0');
 			$('#playlist-embed').find('iframe').remove();
 			$("#no-playlists-left").hide();
+			$('#progress-div').hide();
 		
 			getPlaylists(access_token, userId, userPlaylistsPlaceholder, userPlaylistsTemplate);
 			

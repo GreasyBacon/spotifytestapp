@@ -92,6 +92,8 @@ var getPlaylists = function(accessToken, userId, userPlaylistsPlaceholder, userP
 
 var createPlaylist = function(userId, accessToken, playlistName) {
 	
+	$("#progress-status").text('Creating new playlist');
+	
 	return Promise.resolve(
 		$.ajax({
 			url: 'https://api.spotify.com/v1/users/' + userId + '/playlists',
@@ -119,6 +121,8 @@ var getPlaylistTracks = function(userId, accessToken, tracksURL) {
 	
 	var tracks = [];
 	var initialOffset = 0;
+	
+	$("#progress-status").text('Getting tracks of all selected playlists');
 	
 	var apiCall = function(offset) {
 		return Promise.resolve(
@@ -167,6 +171,8 @@ var addTracksToPlaylist = function(userId, accessToken, playlistId, allTrackIds)
 	
 	var initialPos = 0;
 	var endPos = 100;
+	
+	$("#progress-status").text('Adding all tracks to new playlist');
 	
 	if (endPos > allTrackIds.length) {
 		endPos = allTrackIds.length;
