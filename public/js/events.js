@@ -9,7 +9,7 @@ var mergeCompleted = function(userId, playlistId) {
 	$('#embedded-playlist').show();
 	
 	var playlistUri = "spotify:user:" + userId + ":playlist:" + playlistId;
-	var playlistShareUrl = 'https://open.spotify.com/user/' + userId + '/playlist/' + playlistId;
+	var playlistName = $("#playlist-name").val();
 	
 	var playlistEmbedHtml = '<iframe src=' + 
 		'"https://embed.spotify.com/?uri=' + playlistUri + '"' +
@@ -22,6 +22,31 @@ var mergeCompleted = function(userId, playlistId) {
 		$(this).css('width',$(this).parent(1).css('width'));
 		$(this).attr('src',$(this).attr('src'));
   	});
+	  
+	var playlistShareText = 'I just created a new merged playlist using mergeyoplaylists.today! #mergeyoplaylists #spotify #music';
+	var playlistShareUrl = 'https://open.spotify.com/user/' + userId + '/playlist/' + playlistId;
+	
+	//set share button links
+	
+	//facebook - example:
+	$("#facebook-share").prop('href', 'https://www.facebook.com/sharer/sharer.php?u=' + 
+		playlistShareUrl
+	);
+
+	//twitter - example:	
+	$("#twitter-share").prop('href', 'http://twitter.com/share?text=' +
+		playlistShareText + '&url=' + playlistShareUrl
+	);
+
+	//tumblr - example:	
+	$("#tumblr-share").prop('href', 'http://www.tumblr.com/share/link?url=' + 
+		playlistShareUrl + '&description=I just created a new merged playlist using <a href="https://mergeyoplaylists.today">mergeyoplaylists.today</a>!'
+	);
+	
+	//reddit - example:	
+	$("#reddit-share").prop('href', 'https://www.reddit.com/submit?url=' +
+		playlistShareUrl + '&title=' + playlistName + ' - created with mergeyoplaylists.today!'
+	);
 	
 	mergeButton.prop('disabled', 'disabled');
 	footerInfo.animate( { height:"0px" }, { queue:false, duration:500 });
@@ -119,9 +144,9 @@ var applyEventListeners = function(userId, access_token) {
 								
 			var playlistResults = $("#playlist-results");
 			var playlistName = $("#playlist-name").val();
-			var tracks = [];
 			
 			$( this ).prop('disabled', true);
+			$("#playlist-name").prop('disabled', true);
 			
 			//create new playlist with name provided
 			var playlistId = createPlaylist(userId, access_token, playlistName);
