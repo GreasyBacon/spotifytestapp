@@ -172,7 +172,7 @@ var addTracksToPlaylist = function(userId, accessToken, playlistId, allTrackIds)
 	var initialPos = 0;
 	var endPos = 100;
 	
-	$("#progress-status").text('Adding all tracks to new playlist');
+	$("#progress-status").text('Adding tracks to new playlist');
 	
 	if (endPos > allTrackIds.length) {
 		endPos = allTrackIds.length;
