@@ -63,7 +63,26 @@
       <script id="user-profile-template" type="text/x-handlebars-template">
         <h1>Logged in as {{display_name}}</h1>
         <div class="media">
-          <div class="pull-left">
+          <table class="user-info">
+            <tr>
+            <td><img class="media-object" width="150" src="{{images.0.url}}" /></td>
+            </tr>
+          </table>
+          <table class="user-info table">
+            <tr>
+              <td><b>Display Name</b></td>
+              <td>{{display_name}}</td>
+            </tr>
+            <tr>
+              <td><b>Country</b></td>
+              <td>{{country}}</td>
+            </tr>
+            <tr>
+              <td><b>Id</b></td>
+              <td>{{id}}</td>
+            </tr>
+          </table>
+          <!--<div class="pull-left">
             <img class="media-object" width="150" src="{{images.0.url}}" />
           </div>
           <div class="media-body">
@@ -71,7 +90,7 @@
               <dt>Display name</dt><dd class="clearfix">{{display_name}}</dd>
               <dt>Country</dt><dd>{{country}}</dd>
               <dt>Id</dt><dd>{{id}}</dd>
-              <dt>Spotify URI</dt><dd><a href="{{external_urls.spotify}}">{{external_urls.spotify}}</a></dd>
+              <dt>Spotify URI</dt><dd><a href="{{external_urls.spotify}}">{{external_urls.spotify}}</a></dd> -->
               <!-- <dt>Email</dt><dd>{{email}}</dd> -->
               <!-- <dt>Link</dt><dd><a href="{{href}}">{{href}}</a></dd> -->
               <!-- <dt>Profile Image</dt><dd class="clearfix"><a href="{{images.0.url}}">{{images.0.url}}</a></dd> -->

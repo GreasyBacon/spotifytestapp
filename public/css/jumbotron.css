@@ -52,6 +52,18 @@ body {
   vertical-align: middle;
 }
 
+.user-info {
+  display: inline-block;
+  margin: 0 auto;
+  vertical-align: top;
+  max-width: 40%;
+  padding-left: 20px;
+}
+
+.user-info tbody {
+  font-size: 1.4em;
+}
+
 .selected {
     background-color: rgba(152, 251, 152, 0.7);
     position: absolute;
