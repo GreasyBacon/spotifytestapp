@@ -14,18 +14,26 @@ Create a 'config' folder in the main directory and rename the example keys file 
 
 ## Running the app
 
+By default, I have it set up to run with https. Please comment out the following lines in app.js if you just want to run it locally without 's':
+
+    $ var private_key = fs.readFileSync(keys['private_key_path'], 'utf8');
+    $ var certificate = fs.readFileSync(keys['certificate_path'], 'utf8');
+    $ var credentials = {key: private_key, cert: certificate};
+    $ var httpsServer = https.createServer(credentials, app);
+    $ httpsServer.listen(443);
+
 Run via the app.js file contained within the main directory. 
 
     $ node app.js
 
-Then, open `http://localhost:8888` in a browser.
+Then, open `http://localhost` in a browser (it runs on port 80 by default).
 
 ### Using your own credentials
- In order to use the application you will need to generate a client ID and secret key.
+In order to use the application you will need to generate a client ID and secret key.
 
 Go to [My Applications on Spotify Developer](https://developer.spotify.com/my-applications) and create your application. For this app, I followed Spotify's instructions and registered these Redirect URIs:
 
-* http://localhost:8888 (needed for the implicit grant flow)
-* http://localhost:8888/callback
+* http://localhost (needed for the implicit grant flow)
+* http://localhost/callback
 
 Once you have created your app, replace the `client_id`, `redirect_uri` and `client_secret` within the 'keys' config file.
