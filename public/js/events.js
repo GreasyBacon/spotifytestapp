@@ -136,7 +136,9 @@ var applyEventListeners = function(userId, access_token) {
 					var playlist = $(playlistResult).parent();
 					var tracksURL = $(playlist.children('img')).data('trackurl');
 					
-					return getPlaylistTracks(userId, access_token, tracksURL)
+					return Promise.delay(2000).then(function(){
+						return getPlaylistTracks(userId, access_token, tracksURL);
+					});
 					
 				}).then(function(allTracks){
 					
