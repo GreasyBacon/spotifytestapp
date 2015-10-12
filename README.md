@@ -1,8 +1,12 @@
-# Spotify Accounts Authentication Examples
+# Merge Yo' Playlists
 
-This project is an attempt to create a small application to allow users to merge their Spotify playlists using a simple web application. 
+This project is an attempt to create a small web application to allow users to merge their Spotify playlists and share with their friends or the world! 
 
 It is also a chance for me to come to terms on using the "Authorization Code flow" present in the Spotify API. 
+
+## Why the name 'Merge Yo' Playlists'?
+
+Because it's incredibly ironic, as I'm pretty damn white. Plus, I love [this joke](https://www.youtube.com/watch?v=OP3xf6BFEIo) in Parks and Rec to death. 
 
 ## Installation
 
